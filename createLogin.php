@@ -3,8 +3,8 @@
 require "config.php";
  
 // Define variables and initialize with empty values
-$virksomhed = $emne = $klageinfo = $dato = "";
-$virksomhed_err = $emne_err = $klaginfor_err = $dato_err = "";
+$virksomhed = $brugernavn = $kode = $ansvarlig = "";
+$virksomhed_err = $brugernavn_err = $kode_err = $ansvarlig_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -16,44 +16,44 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $virksomhed = $input_virksomhed;
     }
     
-    // Validate emne
-    $input_emne = trim($_POST["emne"]);
-    if(empty($input_emne)){
-        $emne_err = "Skriv emne";     
+    // Validate brugernavn
+    $input_brugernavn = trim($_POST["brugernavn"]);
+    if(empty($input_brugernavn)){
+        $brugernavn_err = "Skriv brugernavn";     
     } else{
-        $emne = $input_emne;
+        $brugernavn = $input_brugernavn;
     }
 
-    // Validate klageinfo
-    $input_klageinfo = trim($_POST["klageinfo"]);
-    if(empty($input_klageinfo)){
-        $klageinfo_err = "Skriv klageinfo";     
+    // Validate kode
+    $input_ansvarlig = trim($_POST["kode"]);
+    if(empty($input_ansvarlig)){
+        $kode_err = "Skriv kode";     
     } else{
-        $klageinfo = $input_klageinfo;
+        $kode = $input_ansvarlig;
     }
     
-    // Validate dato
-    $input_dato = trim($_POST["dato"]);
+    // Validate ansvarlig
+    $input_dato = trim($_POST["ansvarlig"]);
     if(empty($input_dato)){
-        $dato_err = "skriv dato";    
+        $ansvarlig_err = "skriv ansvarlig";    
     } else{
-        $dato = $input_dato;
+        $ansvarlig = $input_dato;
     }
     
     // Check input errors before inserting in database
-    if(empty($virksomhed_err) && empty($emne_err) && empty($klageinfo_err) && empty($dato_err)){
+    if(empty($virksomhed_err) && empty($brugernavn_err) && empty($kode_err) && empty($ansvarlig_err)){
         // Prepare an insert statement
-        $sql = "INSERT INTO klager (virksomhed, emne, klageinfo, dato) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO login (virksomhed, brugernavn, kode, ansvarlig) VALUES (?, ?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ssss", $param_virksomhed, $param_emne, $param_klageinfo, $param_dato);
+            mysqli_stmt_bind_param($stmt, "ssss", $param_virksomhed, $param_brugernavn, $param_kode, $param_ansvarlig);
             
             // Set parameters
             $param_virksomhed = $virksomhed;
-            $param_emne = $emne;
-            $param_klageinfo = $klageinfo;
-            $param_dato = $dato;
+            $param_brugernavn = $brugernavn;
+            $param_kode = $kode;
+            $param_ansvarlig = $ansvarlig;
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -92,8 +92,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mt-5">Tilføj klage</h2>
-                    <p>Udfyld for at tilføje klage</p>
+                    <h2 class="mt-5">Tilføj Login</h2>
+                    <p>Udfyld for at tilføje Login</p>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group">
                             <label>Virksomhed</label>
@@ -101,19 +101,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <span class="invalid-feedback"><?php echo $virksomhed_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Emne</label>
-                            <input type="text" name="emne" class="form-control <?php echo (!empty($emne_err)) ? 'is-invalid' : ''; ?>"><?php echo $emne; ?></textarea>
-                            <span class="invalid-feedback"><?php echo $emne_err;?></span>
+                            <label>Brugernavn</label>
+                            <input type="text" name="brugernavn" class="form-control <?php echo (!empty($brugernavn_err)) ? 'is-invalid' : ''; ?>"><?php echo $brugernavn; ?></textarea>
+                            <span class="invalid-feedback"><?php echo $brugernavn_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Klageinfo</label>
-                            <textarea name="klageinfo" class="form-control <?php echo (!empty($klageinfo_err)) ? 'is-invalid' : ''; ?>"><?php echo $klageinfo; ?></textarea>
-                            <span class="invalid-feedback"><?php echo $klageinfo_err;?></span>
+                            <label>Kode</label>
+                            <textarea name="kode" class="form-control <?php echo (!empty($kode_err)) ? 'is-invalid' : ''; ?>"><?php echo $kode; ?></textarea>
+                            <span class="invalid-feedback"><?php echo $kode_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Dato</label>
-                            <input type="text" name="dato" class="form-control <?php echo (!empty($dato_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $dato; ?>">
-                            <span class="invalid-feedback"><?php echo $dato_err;?></span>
+                            <label>Ansvarlig</label>
+                            <input type="text" name="ansvarlig" class="form-control <?php echo (!empty($ansvarlig_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $ansvarlig; ?>">
+                            <span class="invalid-feedback"><?php echo $ansvarlig_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <a href="index.php" class="btn btn-secondary ml-2">Cancel</a>
