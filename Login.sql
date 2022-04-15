@@ -20,8 +20,10 @@ CREATE TABLE IF NOT EXISTS `Login` (
 
 INSERT INTO `Login` (`id`, `virksomhed`, `brugernavn`, `kode`, `ansvarlig`) VALUES
 (1, 'House of code', 'Henrik2022','huskode', 'Søren Hansen'),
-(2, 'UCL', 'BOSTÆ','Christinaersej', 'Søren Hansen'),
-(3, 'Dataforståelse', 'Kimmo','GoØkit', 'Kim Mogensen');
+(2, 'Tietgen business', 'Mathias','TBletsgo', 'Kim Mogensen'),
+(3, 'OUH', 'KlausH','ODhosp', 'Søren Hansen'),
+(4, 'UCL', 'BOSTÆ','Christinaersej', 'Søren Hansen'),
+(5, 'Dataforståelse', 'Kimmo','GoØkit', 'Kim Mogensen');
     
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -20,6 +20,8 @@ CREATE TABLE IF NOT EXISTS `Klager` (
 
 INSERT INTO `Klager` (`id`, `virksomhed`, `emne`, `klageinfo`, `dato`) VALUES
 (1, 'House of Code', 'Manglende rengøring','Der mangler at blive vasket gulv', '04/04/2022'),
+(1, 'House of Code', 'Manglende rengøring','Der mangler at blive tørret borde', '05/04/2022'),
+(1, 'House of Code', 'Manglende rengøring','Der mangler at blive rengjort toilet', '06/04/2022'),
 (2, 'House of Code', 'Stjålet ur','Sørens ur er blevet stjålet i onsdags', '03/04/2022'),
 (3, 'UCL', 'Manglende rengøring','Der skal tørres borde af', '24/03/2022');
 
